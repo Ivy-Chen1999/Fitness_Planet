@@ -9,6 +9,7 @@ import ActivityDetail from "./pages/ActivityDetail";
 import MyActivities from "./pages/MyActivities";
 import MyCourses from "./pages/MyCourses";
 import TraineeStats from "./pages/TraineeStats";
+import './App.css';
 
 function App() {
   return (

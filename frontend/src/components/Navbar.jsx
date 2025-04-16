@@ -1,5 +1,3 @@
-// src/components/Navbar.jsx
-console.log("Navbar loaded");
 import { Link, useNavigate } from "react-router-dom";
 import { useCurrentUser } from "../contexts/UserContext";
 
@@ -19,16 +17,46 @@ function Navbar() {
   };
 
   return (
-    <nav style={{ padding: "1rem", background: "#eee" }}>
-      <Link to="/" style={{ marginRight: "1rem" }}>Home</Link>
-      {!user && <>
-        <Link to="/login" style={{ marginRight: "1rem" }}>Login</Link>
-        <Link to="/register">Register</Link>
-      </>}
-      {user && <>
-        <span style={{ marginRight: "1rem" }}>Hello, {user.name} ({user.role === 1 ? "Trainee" : "Coach"})</span>
-        <button onClick={handleLogout}>Logout</button>
-      </>}
+    <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: "#6f42c1" }}>
+      <div className="container">
+        <Link className="navbar-brand" to="/">FitnessPlanet 💜</Link>
+
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            {!user && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">Login</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/register">Register</Link>
+                </li>
+              </>
+            )}
+            {user && (
+              <>
+                <li className="nav-item d-flex align-items-center">
+                  <span className="nav-link">Hello, <strong>{user.name}</strong> ({user.role === 1 ? "Trainee" : "Coach"})</span>
+                </li>
+                <li className="nav-item">
+                  <button className="btn btn-outline-light btn-sm ms-2" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      </div>
     </nav>
   );
 }

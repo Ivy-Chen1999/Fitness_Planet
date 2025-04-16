@@ -1,8 +1,9 @@
 // src/pages/Register.jsx
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCurrentUser } from "../contexts/UserContext";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 function Register() {
   const [name, setName] = useState("");
@@ -17,7 +18,7 @@ function Register() {
     setError("");
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/register`, {
+      const res = await fetch(`${API_BASE}/api/auth/register`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -25,7 +26,7 @@ function Register() {
       });
       const data = await res.json();
       if (data.success) {
-        const loginRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/login`, {
+        const loginRes = await fetch(`${API_BASE}/api/auth/login`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -33,7 +34,7 @@ function Register() {
         });
         const loginData = await loginRes.json();
         if (loginData.success) {
-          setUser(loginData.data); 
+          setUser(loginData.data);
           navigate("/");
         } else {
           setError("Registered but auto-login failed");
@@ -47,27 +48,61 @@ function Register() {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Register</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username: </label>
-          <input value={name} onChange={(e) => setName(e.target.value)} required />
-        </div>
-        <div>
-          <label>Password: </label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <div>
-          <label>Role: </label>
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="1">Trainee</option>
-            <option value="2">Coach</option>
-          </select>
-        </div>
-        <button type="submit">Register</button>
-      </form>
+    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
+      <div className="card shadow p-4" style={{ maxWidth: "500px", width: "100%" }}>
+        <h2 className="text-center mb-4" style={{ color: "#6f42c1" }}>Register</h2>
+
+        {error && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Username</label>
+            <input
+              className="form-control"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              placeholder="Choose a username"
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Choose a password"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="form-label">Role</label>
+            <select
+              className="form-select"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="1">Trainee</option>
+              <option value="2">Coach</option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            className="btn w-100"
+            style={{ backgroundColor: "#6f42c1", color: "white" }}
+          >
+            Register
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

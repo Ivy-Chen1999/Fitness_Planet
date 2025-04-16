@@ -1,3 +1,11 @@
+/* 通用样式 */
+body {
+  background-color: #f9f5ff;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+/* 根容器 */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,15 +13,39 @@
   text-align: center;
 }
 
+/* 紫色主题链接 */
+a {
+  color: #6f42c1;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #5a379e;
+  text-decoration: underline;
+}
+
+/* 卡片风格 */
+.card {
+  padding: 2em;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(111, 66, 193, 0.1);
+  margin-bottom: 2rem;
+}
+
+/* Logo 动画 */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #6f42c1aa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -33,10 +65,17 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
-
+/* 文本样式 */
 .read-the-docs {
   color: #888;
+  font-style: italic;
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(111, 66, 193, 0.15);
 }
